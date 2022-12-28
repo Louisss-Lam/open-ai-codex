@@ -11,7 +11,7 @@ function loader(element) {
 
     loadInterval = setInterval(() => {
         element.textContent += '.';
-        if(element.textContext === '....') {
+        if(element.textContent === '....') {
             element.textContent = '';
         }
     }, 300);
@@ -43,7 +43,7 @@ function chatStripe(isAi, value, uniqueId) {
         `
             <div class='wrapper ${isAi && 'ai'}'>
                 <div class='chat'>
-                    <div classname='profile'>
+                    <div class='profile'>
                         <img 
                             src='${isAi ? bot : user}'
                             alt='${isAi ? 'bot' : 'user'}'
@@ -64,7 +64,7 @@ const handleSubmit = async (e) => {
     // user's chatstripe
     chatContainer.innerHTML += chatStripe(false, data.get('prompt'));
 
-    form .rest();
+    form.reset();
 
     // bot's chatstripe
     const uniqueId = generateUniqueId();
@@ -78,10 +78,10 @@ const handleSubmit = async (e) => {
 
     // fetch data from server -> bot's response
 
-    const response = await fetch('http://localhost:5000', {
+    const response = await fetch('http://localhost:5000/', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
             prompt: data.get('prompt')
