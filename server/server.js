@@ -2,7 +2,6 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import { Configuration, OpenAIApi } from 'openai';
-import { reset } from 'nodemon';
 
 dotenv.config();
 
@@ -44,3 +43,5 @@ app.post('/', async (req, res) => {
         reset.status(500).send({ error })
     }
 })
+
+app.listen(5000, () => console.log('Server is running on port http://localhost:5000'));
